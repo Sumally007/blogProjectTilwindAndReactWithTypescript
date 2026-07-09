@@ -6,10 +6,12 @@ import TopicsList from "./components/TopicsList";
 import { TrendsList } from "./components/TrendsList";
 import { useState } from "react";
 import type { Blog } from "./components/Types";
+import Modal from "./components/Modal";
+import BlogForm from "./components/BlogForm";
 
 const App = () => {
 
-  const [isModalOpen setModalOpen] = useState(false);
+  const [isModalOpen, setModalOpen] = useState(false);
   const [editingBlog, setEditingBlog] = useState<Blog | null>(null);
 
   const openModalForNewBlog = () => {
@@ -37,6 +39,9 @@ const App = () => {
               </button>
 
               {/* {Article list} */}
+              {isModalOpen && (<Modal onClose={() => setModalOpen(false)}>
+                <BlogForm existingBlog={editingBlog} onClose={() => setModalOpen(false)} />
+              </Modal>)}
             </div>
           </section>
 
