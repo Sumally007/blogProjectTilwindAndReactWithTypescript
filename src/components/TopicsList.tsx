@@ -13,7 +13,7 @@ const TopicsList = () => {
             <h3 className="font-semibold text-lg mb-4">
                 Topics for you
             </h3>
-            <div className="flex flex-wrap grap-2">
+            <div className="flex flex-wrap grap-2 gap-y-2">
                 {topics.map((topic, index) => (
                     <span key={index} className="px-3 py-1 bg-gray-200 text-gray-700 text-sm rounded-full cursor-pointer hover:bg-gray-300">
                         {topic}
