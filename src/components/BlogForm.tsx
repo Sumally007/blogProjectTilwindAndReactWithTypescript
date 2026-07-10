@@ -3,27 +3,27 @@ import { useBlogs } from "./shared/BlogContext"
 import type { Blog } from "./Types";
 
 interface BlogFormProps {
-    existingBlog?: Blog;
+    existingBlog?: Blog | null;
     onClose: () => void;
 }
 
 const BlogForm: React.FC<BlogFormProps> = ({ existingBlog, onClose }) => {
 
-    const { addBlog, updateBlog } = useBlogs(existingBlog?.title || "");
+    const { addBlog, updateBlog } = useBlogs();
     const [title, setTitle] = useState(existingBlog?.title || "");
     const [description, setDescription] = useState(existingBlog?.description || "");
 
     const [image, setImage] = useState(existingBlog?.image || "");
-    const [time, setTime] = useState(existingBlog?.title || "");
+    const [time, setTime] = useState(existingBlog?.time || "");
 
     useEffect(() => {
         if (existingBlog) {
-            setTime(existingBlog.title);
+            setTitle(existingBlog.title);
             setDescription(existingBlog.description);
             setImage(existingBlog.image);
             setTime(existingBlog.time)
         }
-    })
+    }, [existingBlog])
 
     const handleSubmit = () => {
         const blog: Blog = {
@@ -77,18 +77,20 @@ const BlogForm: React.FC<BlogFormProps> = ({ existingBlog, onClose }) => {
                     onChange={(e) => setTime(e.target.value)}
                     className="block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-black"
                 />
+
+
             </div>
 
             <div className="flex justify-end mt-6 space-x-4">
                 <button
                     onClick={handleSubmit}
-                    className="bg-blue-600 text-white px-6 py-2 rounded-lg font-semibold shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-black"
+                    className="bg-blue-600 text-white px-6 py-2 rounded-lg font-semibold shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-black cursor-pointer"
                 >
                     {existingBlog ? "Update" : "Add"}
                 </button>
                 <button
                     onClick={onClose}
-                    className="bg-gray-500 text-white px-6 py-2 rounded-lg font-semibold shadow-sm hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-500"
+                    className="bg-gray-500 text-white px-6 py-2 rounded-lg font-semibold shadow-sm hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-500 cursor-pointer"
                 >
                     Cancel
                 </button>

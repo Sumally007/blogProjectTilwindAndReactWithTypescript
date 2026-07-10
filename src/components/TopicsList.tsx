@@ -15,7 +15,7 @@ const TopicsList = () => {
             </h3>
             <div className="flex flex-wrap grap-2">
                 {topics.map((topic, index) => (
-                    <span className="px-3 py-1 bg-gray-200 text-gray-700 text-sm rounded-full cursor-pointer hover:bg-gray-300">
+                    <span key={index} className="px-3 py-1 bg-gray-200 text-gray-700 text-sm rounded-full cursor-pointer hover:bg-gray-300">
                         {topic}
                     </span>
                 ))}

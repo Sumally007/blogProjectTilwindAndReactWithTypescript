@@ -8,6 +8,7 @@ import { useState } from "react";
 import type { Blog } from "./components/Types";
 import Modal from "./components/Modal";
 import BlogForm from "./components/BlogForm";
+import ArticleList from "./components/ArticleList";
 
 const App = () => {
 
@@ -19,7 +20,7 @@ const App = () => {
     setModalOpen(true)
   }
 
-  const openMOdalForEdit = () => {
+  const openMOdalForEdit = (blog: Blog) => {
     setEditingBlog(blog);
     setModalOpen(true);
   }
@@ -35,14 +36,16 @@ const App = () => {
 
           <section className="mx-auto p-6">
             <div>
-              <button onClick={openModalForNewBlog} className="ml-[7rem] bg-black flex justify-center items-center text-white px-4 py-2 rounded mb-4">Add New Blog <IoMdAddCircle className="ml-[.5rem]" />{" "}
+              <button onClick={openModalForNewBlog} className="ml-[7rem] bg-black flex justify-center items-center text-white px-4 py-2 rounded mb-4 cursor-pointer">Add New Blog <IoMdAddCircle className="ml-[.5rem]" />{" "}
               </button>
 
-              {/* {Article list} */}
-              {isModalOpen && (<Modal onClose={() => setModalOpen(false)}>
-                <BlogForm existingBlog={editingBlog} onClose={() => setModalOpen(false)} />
-              </Modal>)}
+
             </div>
+            <ArticleList onEdit={openMOdalForEdit} />
+
+            {isModalOpen && (<Modal onClose={() => setModalOpen(false)}>
+              <BlogForm existingBlog={editingBlog} onClose={() => setModalOpen(false)} />
+            </Modal>)}
           </section>
 
           <div className="w-[30%]">
